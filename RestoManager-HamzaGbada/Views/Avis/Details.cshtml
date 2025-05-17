@@ -1,0 +1,48 @@
+﻿@model RestoManager_HamzaGbada.Models.RestosModel.Avis
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Avis</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NomPersonne)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NomPersonne)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DateArr)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DateArr)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Commentaire)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Commentaire)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Restaurant)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Restaurant.NomResto)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.CodeAvis">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
