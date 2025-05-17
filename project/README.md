@@ -1,5 +1,7 @@
 # Project: User & Role Management with .NET Core 8 and Angular
 
+**Note:** The solution for this project is available in a submodule under the `project/solution` directory. The Angular code is located in the `main` branch of the submodule, while the backend code is on the `master` branch.
+
 ## Project Overview
 This project involves building a REST API using .NET Core 8 to manage users and roles, with PostgreSQL as the database service. Students will also develop the frontend using Angular and implement security measures for authentication and authorization.
 
