@@ -1,0 +1,3 @@
+[submodule "project/solution"]
+	path = project/solution
+	url = https://github.com/EyaBenFredj/UserRoleManagement
