@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Hotellerie_Hamza.Models.HotellerieModel.Hotel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name) <!-- Fixed the property name -->
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.stars) <!-- Fixed the property name -->
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.city) <!-- Fixed the property name -->
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.website) <!-- Fixed the property name -->
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tel) <!-- Fixed the property name -->
+            </th>
+            <th>
+                Actions
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.name) <!-- Fixed the property name -->
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.stars) <!-- Fixed the property name -->
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.city) <!-- Fixed the property name -->
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.website) <!-- Fixed the property name -->
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tel) <!-- Fixed the property name -->
+                </td>
+
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.id">Delete</a> |
+                    <a href="@Url.Action("Index", "Appreciations", new { hotelId = item.id })">View Appreciations</a> <!-- Add View Appreciations link -->
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
