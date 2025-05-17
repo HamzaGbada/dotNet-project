@@ -1,0 +1,50 @@
+﻿@model IEnumerable<CinemaManager_Hamza.Models.Cinema.ProdMovie>
+
+@{
+    ViewData["Title"] = "MoviesAndTheirProds_UsingModel";
+}
+
+<h1>MoviesAndTheirProds Using Model</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Movie Title
+            </th>
+            <th>
+                Movie Genre
+            </th>
+            <th>
+                Producer Name
+            </th>
+            <th>
+                Producer Nationality
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pNat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.mGenre)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

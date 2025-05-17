@@ -1,0 +1,43 @@
+﻿@model IEnumerable<CinemaManager_Hamza.Models.Cinema.ProdMovie>
+
+<h2>MoviesAndTheirProds_UsingModel</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Movie Title
+        </th>
+        <th>
+            Movie Genre
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pNat)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.mTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.mGenre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pNat)
+            </td>
+
+        </tr>
+    }
+
+</table>
+

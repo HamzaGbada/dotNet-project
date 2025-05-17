@@ -1,16 +1,14 @@
 ﻿@model IEnumerable<CinemaManager_Hamza.Models.Cinema.Movie>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "MoviesAndTheirProds";
 }
 
-<h1>Index</h1>
+<h1>MoviesAndTheirProds</h1>
 
 <p>
-    <a asp-action="Create">Create New</a> |
-    <a asp-action="MoviesAndTheirProds">Go to Movies And Their Prods</a>
+    <a asp-action="Create">Create New</a>
 </p>
-
 <table class="table">
     <thead>
         <tr>
@@ -38,6 +36,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Producer.Id)
             </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producer.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Producer.Nationality)
+                </td>
+
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
