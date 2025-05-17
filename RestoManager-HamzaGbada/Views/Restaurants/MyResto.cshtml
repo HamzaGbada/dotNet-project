@@ -1,0 +1,25 @@
+﻿@model IEnumerable<RestoManager_HamzaGbada.Models.RestosModel.Restaurant>
+
+@{
+    ViewData["Title"] = "Restaurants with Average Rating >= 3.5";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>Restaurant Name</th>
+        <th>Average Rating</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.nomR</td>
+            <td>@item.moy</td>
+        </tr>
+    }
+    </tbody>
+</table>

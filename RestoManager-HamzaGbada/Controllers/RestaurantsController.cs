@@ -159,5 +159,38 @@ namespace RestoManager_HamzaGbada.Controllers
         {
             return _context.Restaurants.Any(e => e.CodeResto == id);
         }
+        public IActionResult MoySup35()
+        {
+            // 1. List1: Join Restaurants with Avis to get required data
+            var list1 = from r in _context.Restaurants
+                join a in _context.Avis
+                    on r.CodeResto equals a.NumResto
+                select new
+                {
+                    nomR = r.NomResto,
+                    villeR = r.Ville,
+                    pers = a.NomPersonne,
+                    note = a.Note
+                };
+
+            // 2. List2: Group by restaurant name and calculate the average rating
+            var list2 = from elem in list1
+                group elem by elem.nomR into grp
+                select new MoyResto
+                {
+                    nomR = grp.Key,  // Restaurant name
+                    moy = grp.Average(p => p.note)  // Average rating
+                };
+
+            // 3. List3: Filter restaurants with average rating greater than or equal to 3.5
+            var list3 = from resto in list2
+                where resto.moy >= 3.5
+                select resto;
+
+            // Return the list to the view
+            return View(list3.ToList());
+        }
+
     }
+    
 }
