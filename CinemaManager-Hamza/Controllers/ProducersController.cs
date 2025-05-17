@@ -97,5 +97,42 @@ namespace CinemaManager_Hamza.Controllers
                 return View();
             }
         }
+        public ActionResult ProdsAndTheirMovies()
+        {
+            var cinemaDBContext = _context.Producers.Include(p => p.Movies);
+            return View(cinemaDBContext.ToList());
+        }
+        public ActionResult ProdsAndTheirMovies_UsingModel()
+        {
+            var laListe = (from p in _context.Producers
+                join m in _context.Movies
+                    on p.Id equals m.ProducerId
+
+                select new ProdMovie
+                {
+                    mGenre = m.Genre,
+                    mTitle = m.Title,
+                    pName = p.Name,
+                    pNat = p.Nationality
+                });
+
+            return View(laListe);
+        }
+        public ActionResult MyMovies(int id)
+        {
+            var laListe = (from p in _context.Producers
+                join m in _context.Movies
+                    on p.Id equals m.ProducerId
+                where p.Id == id
+                select new ProdMovie
+                {
+                    mTitle = m.Title,
+                    mGenre = m.Genre,
+                    pName = p.Name,
+                    pNat = p.Nationality
+                });
+
+            return View(laListe);
+        }
     }
 }

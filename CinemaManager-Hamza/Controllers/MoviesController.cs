@@ -160,4 +160,82 @@ namespace CinemaManager_Hamza.Controllers
             return _context.Movies.Any(e => e.Id == id);
         }
     }
+    // Refactored Controller Actions
+
+public class MovieController : Controller
+{
+    private readonly CinemaDBContext _context;
+
+    public MovieController(CinemaDBContext context)
+    {
+        _context = context;
+    }
+
+    // Movies with their producers using eager loading
+    public ActionResult MoviesAndTheirProds()
+    {
+        var cinemaDBContext = _context.Movies.Include(m => m.Producer).ToList();
+        return View(cinemaDBContext);
+    }
+
+    // Movies and their producers using custom model (DTO)
+    public ActionResult MoviesAndTheirProds_UsingModel()
+    {
+        var laListe = _context.Movies
+            .Join(_context.Producers, m => m.ProducerId, p => p.Id, (m, p) => new ProdMovie
+            {
+                mTitle = m.Title,
+                mGenre = m.Genre,
+                pName = p.Name,
+                pNat = p.Nationality
+            }).ToList();
+
+        return View(laListe);
+    }
+
+    // Search movies by title (case insensitive)
+    public ActionResult SearchByTitle(string titre = "")
+    {
+        var movies = _context.Movies.Include(m => m.Producer)
+            .Where(m => string.IsNullOrEmpty(titre) || m.Title.Contains(titre, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+
+        return View(movies);
+    }
+
+    // Search movies by genre (case insensitive)
+    public ActionResult SearchByGenre(string genre = "")
+    {
+        var movies = _context.Movies.Include(m => m.Producer)
+            .Where(m => string.IsNullOrEmpty(genre) || m.Genre.Contains(genre, StringComparison.OrdinalIgnoreCase))
+            .ToList();
+
+        return View(movies);
+    }
+
+    // Search movies by both genre and title (case insensitive)
+    public ActionResult SearchBy2(string genre, string titre)
+    {
+        // Get distinct genres for dropdown list
+        var genres = _context.Movies.Select(m => m.Genre).Distinct().ToList();
+        ViewBag.genre = new SelectList(genres);
+
+        var moviesQuery = _context.Movies.Include(m => m.Producer).AsQueryable();
+
+        // Filter based on provided genre and title
+        if (!string.IsNullOrEmpty(titre))
+        {
+            moviesQuery = moviesQuery.Where(m => m.Title.Contains(titre, StringComparison.OrdinalIgnoreCase));
+        }
+
+        if (!string.IsNullOrEmpty(genre))
+        {
+            moviesQuery = moviesQuery.Where(m => m.Genre.Contains(genre, StringComparison.OrdinalIgnoreCase));
+        }
+
+        var movies = moviesQuery.ToList();
+        return View(movies);
+    }
+}
+
 }
